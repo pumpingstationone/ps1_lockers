@@ -10,8 +10,12 @@ services:
       environment: 
         PYTHONUNBUFFERED: 1  # this allows fastapi to print to the terminal
         PYTHONDONTWRITEBYTECODE: 1  # this has python not write __pycache__ files
-        ENV_1: ${ENV_1}
-        ENV_2: ${ENV_2}
+        LDAP_SERVER: ${LDAP_SERVER}
+        LDAP_USER: ${LDAP_USER}
+        LDAP_PASSWORD: ${LDAP_PASSWORD}
+        MQTT_HOST: ${MQTT_HOST}
+        MQTT_PORT: ${MQTT_PORT}
+        MQTT_USERNAME: ${MQTT_USERNAME}
       ports:
         - 8000:8000
       volumes:

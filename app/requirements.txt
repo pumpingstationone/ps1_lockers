@@ -1,4 +1,5 @@
 fastapi
+fastapi-mqtt
 python-multipart
 jinja2
 uvicorn

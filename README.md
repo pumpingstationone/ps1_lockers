@@ -10,4 +10,8 @@ requires .env file with structure
 LDAP_SERVER =""
 LDAP_USER =""
 LDAP_PASSWORD =""
+
+MQTT_HOST =""
+MQTT_PORT =""
+MQTT_USERNAME =""
 ```
