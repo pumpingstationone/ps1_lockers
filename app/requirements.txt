@@ -1,6 +1,7 @@
 fastapi
 fastapi-mqtt
 python-multipart
+websockets
 jinja2
 uvicorn
 ldap3

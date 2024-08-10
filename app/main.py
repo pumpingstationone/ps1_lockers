@@ -1,5 +1,5 @@
 
-from fastapi import Depends, FastAPI, Request, Form
+from fastapi import Depends, FastAPI, Request, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -7,8 +7,6 @@ from starlette.responses import RedirectResponse
 from pydantic import BaseModel
 from fastapi_mqtt import FastMQTT, MQTTConfig
 import os
-
-
 
 # ---
 # APP
@@ -25,7 +23,7 @@ mqtt_config = MQTTConfig(
     username=os.getenv("MQTT_USERNAME"),
 )
 mqtt = FastMQTT(config=mqtt_config)
-mqtt.init_app(app)
+# mqtt.init_app(app)
 
 
 @mqtt.on_connect()
@@ -67,9 +65,31 @@ app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
 @app.get('/', response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse('index.html', {'request': request, 'env_1': ENV_1, 'env_2': ENV_2})
+    return templates.TemplateResponse('index.html', {'request': request})
 
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: FormModel):
     print('form_model', form_model)
     return {"data will go here": form_model}
+
+
+@app.websocket("/ws/{locker_pod}")
+# https://fastapi.tiangolo.com/advanced/websockets/
+async def websocket_endpoint(
+        websocket: WebSocket,
+        locker_pod: str,
+        q=None,
+        canvas_id: str=None,
+):
+    print(locker_pod)
+    await websocket.accept()        
+    
+    try:
+        while True:
+            msg = await websocket.receive_text()
+            print(msg)
+            await websocket.send_text(f"message: {msg}")
+    # except RuntimeError:
+    except WebSocketDisconnect:
+        print('closing connection, stopping ')
+        

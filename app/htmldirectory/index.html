@@ -2,55 +2,80 @@
 
 
 <html>
-	<head>
-		<title>Example</title>
-		<link rel="icon" href="/static/favicon.ico">
-		<link rel="stylesheet" href="/static/style.css" />
-	</head>
-	<body>
-		<h1>PS1 Locker Server</h1>
-    <hr>
 
-    <h3>/get_tag</h3>
-		<form id="form_model" onsubmit="return create_fetch()">
-			<input type="text" name="tag" id="fm_form1" placeholder="tag#"><br>
-			<input type="submit" value="Submit">
-		</form> <br>
-    <h3>tag data</h3>
-    <div id="form_response"></div>
-    <br><br><br><br>
-    
-    <script>
-			function create_fetch(){
-				let fm_form1 = document.getElementById('fm_form1').value;
+<head>
+  <title>Example</title>
+  <link rel="icon" href="/static/favicon.ico">
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
 
-        let dict = {
-          tag: fm_form1
-        };
-        
-        do_fetch(dict)
-        return false       
-			}
+<body>
+  <h1>PS1 Locker Server Test</h1>
+  <hr>
 
-      async function do_fetch(dict) {
-        const response = await fetch('/get_tag', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(dict)
-        });
-      
-        if (!response.ok) {
-          console.log('problems');
-        }
-        const body = await response.json();
-        console.log(body);
-        let form_response = JSON.stringify(body);
-        document.getElementById('form_response').innerHTML = form_response;
+  <h3>/get_tag</h3>
+  <form id="form_model" onsubmit="return create_fetch()">
+    <input type="text" name="tag" id="fm_form1" placeholder="tag#"><br>
+    <input type="submit" value="Submit">
+  </form> <br>
+  <h3>tag data</h3>
+  <div id="form_response"></div>
+  <br><br><br><br>
+  <h1>WebSocket Chat</h1>
+  <form action="" onsubmit="sendMessage(event)">
+    <input type="text" id="messageText" autocomplete="off" />
+    <button>Send</button>
+  </form>
+  <ul id='messages'>
+  </ul>
+
+  <script>
+    function create_fetch() {
+      let fm_form1 = document.getElementById('fm_form1').value;
+
+      let dict = {
+        tag: fm_form1
+      };
+
+      do_fetch(dict)
+      return false
+    }
+
+    async function do_fetch(dict) {
+      const response = await fetch('/get_tag', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dict)
+      });
+
+      if (!response.ok) {
+        console.log('problems');
       }
-      
+      const body = await response.json();
+      console.log(body);
+      let form_response = JSON.stringify(body);
+      document.getElementById('form_response').innerHTML = form_response;
+    }
 
-		</script>
-	</body>
+    var ws = new WebSocket("ws://localhost:8000/ws/lockers_test");
+    ws.onmessage = function (event) {
+      var messages = document.getElementById('messages')
+      var message = document.createElement('li')
+      var content = document.createTextNode(event.data)
+      message.appendChild(content)
+      messages.appendChild(message)
+    };
+    function sendMessage(event) {
+      var input = document.getElementById("messageText")
+      ws.send(input.value)
+      input.value = ''
+      event.preventDefault()
+    }
+
+
+  </script>
+</body>
+
 </html>
