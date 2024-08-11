@@ -6,12 +6,25 @@ from fastapi.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from pydantic import BaseModel
 from fastapi_mqtt import FastMQTT, MQTTConfig
+from contextlib import asynccontextmanager
+
+import locker_helper as lh
+
 import os
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # startup code
+    lh.get_all_lockers()
+    yield
+    print('doin it and doin it and doin it well')
+    yield
+    # shutdown code
+    
 # ---
 # APP
 # --- 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # ----
 #  MQTT
@@ -24,7 +37,6 @@ mqtt_config = MQTTConfig(
 )
 mqtt = FastMQTT(config=mqtt_config)
 # mqtt.init_app(app)
-
 
 @mqtt.on_connect()
 def mqtt_connect(client, flags, rc, properties):
@@ -58,9 +70,11 @@ def subscribe(client, mid, qos, properties):
 class FormModel(BaseModel):
     tag: str
 
-
+next(lifespan)
 templates = Jinja2Templates(directory='htmldirectory')
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+
+
 
 
 @app.get('/', response_class=HTMLResponse)
