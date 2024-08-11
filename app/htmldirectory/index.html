@@ -59,7 +59,7 @@
       document.getElementById('form_response').innerHTML = form_response;
     }
 
-    var ws = new WebSocket("ws://localhost:8000/ws/lockers_test");
+    var ws = new WebSocket("ws://localhost:8000/ws?locker_pod=lockers_test");
     ws.onmessage = function (event) {
       var messages = document.getElementById('messages')
       var message = document.createElement('li')

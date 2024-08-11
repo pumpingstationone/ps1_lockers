@@ -73,8 +73,7 @@ async def f_model(request: Request, form_model: FormModel):
     return {"data will go here": form_model}
 
 
-@app.websocket("/ws/{locker_pod}")
-# https://fastapi.tiangolo.com/advanced/websockets/
+@app.websocket("/ws")
 async def websocket_endpoint(
         websocket: WebSocket,
         locker_pod: str,
@@ -87,9 +86,8 @@ async def websocket_endpoint(
     try:
         while True:
             msg = await websocket.receive_text()
-            print(msg)
             await websocket.send_text(f"message: {msg}")
-    # except RuntimeError:
+
     except WebSocketDisconnect:
-        print('closing connection, stopping ')
+        print(f'closing connection, stopping {locker_pod}')
         
