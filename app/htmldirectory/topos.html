@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>message topology</title>
+        <link rel="stylesheet" href="/static/style.css">
+        
+</head>
+<body>
+   
+    <h1>PS1 Lockers</h1>
+    <div class="mermaid">
+        graph
+        AD[(AD)] <--> |tag lookup| LS([LockersServer\nFastAPI])
+        RFIDTAG>RFIDTAG] --> |MQTT| LS
+        AD <--> |on_startup\nMISSING\nbuild_locker_data| LS
+        LS <--> |websocket| PyscriptUser1
+        LS <--> |websocket| PyscriptUser2
+        LS <--> |websocket| PyscriptUser3
+        LS --> |MQTT| LockerLights1
+        LS --> |MQTT| LockerLights2
+        LS --> |MQTT| LockerLights3
+        LS -->  |MISSING\nupdate user locker info| WA[(WA)]
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+function renderMermaid(){
+    mermaid.init(undefined,document.querySelectorAll(".mermaid"));
+}
+$(function() {
+    $(document).on('previewUpdated', function() {        
+        renderMermaid();
+    });
+    renderMermaid();
+});
+</script>
+
+</body>
+</html>
+

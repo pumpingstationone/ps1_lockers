@@ -3,14 +3,16 @@ from fastapi import Depends, FastAPI, Request, Form, WebSocket, WebSocketDisconn
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware 
 from pydantic import BaseModel
 from fastapi_mqtt import FastMQTT, MQTTConfig
 from contextlib import asynccontextmanager
 
 import locker_helper as lh
 
-import os
+import os, json
+
+lockers = {}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -25,7 +27,15 @@ async def lifespan(app: FastAPI):
 # APP
 # --- 
 app = FastAPI(lifespan=lifespan)
+origins = ["*"]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ----
 #  MQTT
 # ----
@@ -70,12 +80,8 @@ def subscribe(client, mid, qos, properties):
 class FormModel(BaseModel):
     tag: str
 
-next(lifespan)
 templates = Jinja2Templates(directory='htmldirectory')
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
-
-
-
 
 @app.get('/', response_class=HTMLResponse)
 async def home(request: Request):
@@ -86,6 +92,25 @@ async def f_model(request: Request, form_model: FormModel):
     print('form_model', form_model)
     return {"data will go here": form_model}
 
+@app.get('/pod', response_class=JSONResponse)
+async def get_pod(request: Request, pod: str=""):
+    pod = pod.replace('-', '/')
+    print(pod)
+    return lh.lockers[pod]
+
+
+def process(cmd):
+    cmd = json.loads(cmd)
+    command = cmd['cmd']
+    if command == 'get':
+        # {cmd: get, pod:[pod_name]}
+        return {
+            'cmd': 'renderTable',
+            'name': cmd['name'],
+            'pod': lh.lockers[cmd['name']]    
+        }
+    
+    
 
 @app.websocket("/ws")
 async def websocket_endpoint(
@@ -96,12 +121,15 @@ async def websocket_endpoint(
 ):
     print(locker_pod)
     await websocket.accept()        
-    
+    lockers[locker_pod] = websocket
+    await websocket.send_json({'cmd': 'connected', 'name': locker_pod})
     try:
         while True:
             msg = await websocket.receive_text()
-            await websocket.send_text(f"message: {msg}")
+            resp = process(msg)
+            print(lockers)
+            await websocket.send_json(resp)
 
     except WebSocketDisconnect:
         print(f'closing connection, stopping {locker_pod}')
-        
+
