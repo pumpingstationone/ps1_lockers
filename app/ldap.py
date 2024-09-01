@@ -45,7 +45,7 @@ def get_info_for_tag(tag: str) -> dict|None:
             'email': entry.mail,
             'name': f'{entry.givenName} {entry.sn}'
         }
-        print(result.entry_to_json())
+        print(entry.entry_to_json())
         print(result)
         return {'itis': 'good'}
     
