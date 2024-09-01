@@ -40,11 +40,13 @@ def get_info_for_tag(tag: str) -> dict|None:
         entry = conn.entries[0]
         
         # Print the information
-        return {
+        result = {
             'ad_name': entry.sAMAccountName,
             'email': entry.mail,
             'name': f'{entry.givenName} {entry.sn}'
         }
+        print(result)
+        return {'itis': 'good'}
     
 
 # # Get the tag from the command line
