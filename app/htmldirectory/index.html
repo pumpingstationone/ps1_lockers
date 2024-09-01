@@ -21,13 +21,7 @@
   <h3>tag data</h3>
   <div id="form_response"></div>
   <br><br><br><br>
-  <h1>WebSocket Chat</h1>
-  <form action="" onsubmit="sendMessage(event)">
-    <input type="text" id="messageText" autocomplete="off" />
-    <button>Send</button>
-  </form>
-  <ul id='messages'>
-  </ul>
+  
 
   <script>
     function create_fetch() {
@@ -59,21 +53,8 @@
       document.getElementById('form_response').innerHTML = form_response;
     }
 
-    var ws = new WebSocket("ws://localhost:8000/ws?locker_pod=lockers_test");
-    ws.onmessage = function (event) {
-      var messages = document.getElementById('messages')
-      var message = document.createElement('li')
-      var content = document.createTextNode(event.data)
-      message.appendChild(content)
-      messages.appendChild(message)
-    };
-    function sendMessage(event) {
-      var input = document.getElementById("messageText")
-      ws.send(input.value)
-      input.value = ''
-      event.preventDefault()
-    }
-
+    // var ws = new WebSocket("ws://10.45.15.22:8000/ws?locker_pod=lockers_test");
+    
 
   </script>
 </body>

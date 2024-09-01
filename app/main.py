@@ -9,7 +9,7 @@ from fastapi_mqtt import FastMQTT, MQTTConfig
 from contextlib import asynccontextmanager
 
 import locker_helper as lh
-
+import ldap
 import os, json
 
 lockers = {}
@@ -39,14 +39,16 @@ app.add_middleware(
 # ----
 #  MQTT
 # ----
-print('port', os.getenv("MQTT_PORT"))
+print('MQTT_HOST', os.getenv("MQTT_HOST"))
+MQTT_HOST = os.getenv("MQTT_HOST")
 mqtt_config = MQTTConfig(
-    host=os.getenv("MQTT_HOST"),
+    host=MQTT_HOST,
     port=int(os.getenv("MQTT_PORT")),
     username=os.getenv("MQTT_USERNAME"),
 )
 mqtt = FastMQTT(config=mqtt_config)
-# mqtt.init_app(app)
+if MQTT_HOST:
+    mqtt.init_app(app)
 
 @mqtt.on_connect()
 def mqtt_connect(client, flags, rc, properties):
@@ -89,8 +91,8 @@ async def home(request: Request):
 
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: FormModel):
-    print('form_model', form_model)
-    return {"data will go here": form_model}
+    tag_info = ldap.get_info_for_tag(form_model.tag)
+    return tag_info
 
 @app.get('/pod', response_class=JSONResponse)
 async def get_pod(request: Request, pod: str=""):

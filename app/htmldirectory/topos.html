@@ -4,14 +4,12 @@
     <head>
         <title>message topology</title>
         <link rel="stylesheet" href="/static/style.css">
-        
 </head>
 <body>
-   
     <h1>PS1 Lockers</h1>
     <div class="mermaid">
         graph
-        AD[(AD)] <--> |tag lookup| LS([LockersServer\nFastAPI])
+        AD[(AD)] <--> |tag lookup| LS([LockerServer\nFastAPI])
         RFIDTAG>RFIDTAG] --> |MQTT| LS
         AD <--> |on_startup\nMISSING\nbuild_locker_data| LS
         LS <--> |websocket| PyscriptUser1
