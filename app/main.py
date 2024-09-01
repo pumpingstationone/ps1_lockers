@@ -89,6 +89,10 @@ app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 async def home(request: Request):
     return templates.TemplateResponse('index.html', {'request': request})
 
+@app.get('/topology', response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse('topos.html', {'request': request})
+
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: FormModel):
     tag_info = ldap.get_info_for_tag(form_model.tag)
@@ -99,7 +103,6 @@ async def get_pod(request: Request, pod: str=""):
     pod = pod.replace('-', '/')
     print(pod)
     return lh.lockers[pod]
-
 
 def process(cmd):
     cmd = json.loads(cmd)

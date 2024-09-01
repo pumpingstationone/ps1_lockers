@@ -43,6 +43,6 @@ lockers = {
 }
 
 def get_all_lockers():
-    print('search AD and obtain all lockers data')
+    print('fake search AD and obtain all lockers data')
     for locker in lockers.keys():
         print(f"initializing: {locker}")
