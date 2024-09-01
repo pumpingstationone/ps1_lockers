@@ -41,8 +41,8 @@ def get_info_for_tag(tag: str) -> dict|None:
         
         # Print the information
         result = {
-            'ad_name': entry.sAMAccountName,
-            'email': entry.mail,
+            'ad_name': f"{entry.sAMAccountName}",
+            'email': f"{entry.mail}",
             'name': f'{entry.givenName} {entry.sn}'
         }
         print(entry.entry_to_json())
