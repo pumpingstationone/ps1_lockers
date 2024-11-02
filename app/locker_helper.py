@@ -1,9 +1,10 @@
 import ldap
+from datetime import datetime, timedelta
 
 lockers = {
     'neverland/lockers': [],
     'neverland/floor': [],
-    'pallet_racks': [
+    'neverland__pallet_racks': [
     [{"name":"Eric Beauchamp","address":1,"status":"owned"},
      {"name":"George Hoffman","address":6,"status":"owned"},
      {"name":"","address":11,"status":"empty"},
@@ -46,3 +47,33 @@ def get_all_lockers():
     print('fake search AD and obtain all lockers data')
     for locker in lockers.keys():
         print(f"initializing: {locker}")
+
+def claim_locker(pod, user, address):
+    future_time = datetime.now() + timedelta(hours=24)
+    future_time = future_time.isoformat() + "Z"
+    print(future_time)
+    new_state = {"name":user,"address":address,"status":"full","date":future_time}
+    print(new_state)
+    for row in lockers[pod]:
+        for locker in row:
+            if locker['address'] == address:
+                locker.update(new_state)
+
+def package_lights(pod):
+    colors = {
+        'empty': 0,
+        'full': 1,
+        'warn': 2,
+        'owned': 3,
+    }
+    status = [colors[locker['status']] for row in pod for locker in row]
+    print(status)
+    msg = 0
+    for locker in status:
+        msg <<= 2
+        msg += locker
+    # print(load, status)
+    print(msg)
+
+        
+        
