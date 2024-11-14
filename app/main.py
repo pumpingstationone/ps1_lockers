@@ -13,7 +13,6 @@ import ldap
 import os, json
 
 
-
 open_sockets = {}
 
 # ----
@@ -86,12 +85,6 @@ async def message(client, topic, payload, qos, properties):
         })
         print('sent')
     return 0
-
-
-# @mqtt.subscribe("my/mqtt/topic/#")
-# async def message_to_topic(client, topic, payload, qos, properties):
-#     print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
-#     return 0
 
 
 @mqtt.on_disconnect()
