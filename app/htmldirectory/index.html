@@ -21,22 +21,37 @@
   <h3>tag data</h3>
   <div id="form_response"></div>
   <br><br><br><br>
-  
+  <h3>test tag</h3>
+  <button onclick="fake_tag('0014423595', '/get_tag')">0014423595</button>
+  <button onclick="fake_tag('0002755984', '/get_tag')">0002755984</button>
+  <button onclick="fake_tag('0002767727', '/get_tag')">0002767727</button>
+  <hr>
+  <h3>test tag with mqtt</h3>
+  <button onclick="fake_tag('0014423595', '/fake_mqtt')">0014423595</button>
+  <button onclick="fake_tag('0002755984', '/fake_mqtt')">0002755984</button>
+  <button onclick="fake_tag('0002767727', '/fake_mqtt')">0002767727</button>
+  <br><br><br><br>
 
   <script>
-    function create_fetch() {
+    function fake_tag(tag_num, url) {
+      document.getElementById('fm_form1').value = tag_num;
+      create_fetch(url);
+    }
+
+    function create_fetch(url) {
       let fm_form1 = document.getElementById('fm_form1').value;
 
       let dict = {
         tag: fm_form1
       };
 
-      do_fetch(dict)
+      do_fetch(dict, url)
       return false
     }
 
-    async function do_fetch(dict) {
-      const response = await fetch('/get_tag', {
+    async function do_fetch(dict, url) {
+      console.log('test', url)
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -42,7 +42,6 @@ async def lifespan(app: FastAPI):
     loop = asyncio.get_running_loop()
     loop.create_task(heartbeat())
     yield
-    print('doin it and doin it and doin it well')
     if MQTT_HOST:
         await mqtt.mqtt_shutdown()
     yield
@@ -81,7 +80,7 @@ async def message(client, topic, payload, qos, properties):
         print("found rfid for pod")
         await open_sockets[locker_pod].send_json({
             'cmd': 'choose_locker',
-            'user': 'coms_user',
+            'user': data,
         })
         print('sent')
     return 0
@@ -111,10 +110,29 @@ async def home(request: Request):
 async def home(request: Request):
     return templates.TemplateResponse('topos.html', {'request': request})
 
+@app.get('/lockers_test', response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse('lockers.html', {'request': request})
+
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: Tag):
-    tag_info = ldap.get_info_for_tag(form_model.tag)
+    tag = form_model.tag
+    if tag == 'fake_mqtt':
+        mqtt.publish("ps1_lockers/neverland__pallet_racks", "test_message12345")
+        return {'message': 'sent'}
+        
+    tag_info = ldap.get_info_for_tag(tag)
     return tag_info
+
+@app.post('/fake_mqtt', response_class=JSONResponse)
+async def f_model(request: Request, form_model: Tag):
+    tag = form_model.tag    
+    tag_info = ldap.get_info_for_tag(tag)
+    if "Tag not found" in tag_info:
+        return tag_info
+    mqtt.publish("ps1_lockers/neverland__pallet_racks", tag_info['name'])
+    return tag_info
+
 
 @app.get('/pod', response_class=JSONResponse)
 async def get_pod(request: Request, pod: str=""):

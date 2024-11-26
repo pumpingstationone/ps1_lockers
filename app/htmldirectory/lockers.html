@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <div id="host_type">pyscript</div>
+  <style>
+    .loading-animation {
+      border: 8px solid #068770;
+      border-top: 8px solid #f0f0f0;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: auto;
+  }
+
+  #loading {
+    justify-content: center;
+    background-color: #304050;
+    border-radius: 10px;
+  }
+
+  @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+  }
+  .loadslide {animation: slide 9s ease-in; }
+  
+  @keyframes slide {
+    from { transform: translateX(0%); }
+    to { transform: translateX(40%); }  }
+
+  </style>
+  
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>ps1_lockers - PyScript</title>
+
+  <link rel="icon" type="image/png" href="https://floe.evezor.com/static/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="https://floe.evezor.com/static/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://floe.evezor.com/static/fancy_elements.css" />
+
+  
+
+  <!-- <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.8.2/core.css" />
+  <script type="module" src="https://pyscript.net/releases/2024.8.2/core.js"></script>
+  
+  <!-- I think this can be removed soon... -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+  
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/dracula.min.css">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+  
+  <!-- markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
+  <style>
+    .terminal {
+      height: 350px;
+      padding: 10px;
+      background-color: #304050;
+      font: 15px monospace;
+      color: white;
+      overflow: scroll;
+      text-align: left;
+      resize: vertical;
+    }
+
+    .toggler {
+      margin-left: 10px;
+    }
+
+    .term_input {
+      border: 0px;
+      padding: 10px 10px;
+      outline: none;
+      border-top: 1px solid white;
+      background-color: #304050;
+      font: 15px monospace;
+      letter-spacing: 2px;
+      color: white;
+      overflow: scroll;
+      text-align: left;
+    }
+
+    .parameter {
+      padding: 5px;
+      margin: 3px;
+      border: solid 1px white;
+      border-radius: 5px;
+    }
+
+    input {
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      margin-top: 3px;
+      color: white;
+      border: 1px solid #5FA3D3;
+      background-color: #304050;
+    }
+  </style>
+  
+  <mpy-config>
+  
+    [[fetch]]
+    from = 'https://floe.evezor.com/executable/66be3afe07e398bacanv'
+    to_file = './config.py'
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/iris.py'
+    to_file = './iris.py'
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/floe.py'
+    to_file = './floe.py'
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/message.py'
+    to_file = './message.py'
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/nwk.py'
+    to_file = './nwk.py'
+    
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/GuiLockerPicker.py'
+    to_file = './GuiLockerPicker.py'
+    
+    [[fetch]]
+    from = 'https://floe.evezor.com/parameters/Parameter.py'
+    to_file = './Parameter.py'
+    
+  
+  </mpy-config>
+  
+  
+</head>
+
+<body>
+  
+  <dialog id="loading">
+    <div class="loading-animation"></div>
+    <h1>Building ps1_lockers.</h1>
+    <h3>please wait...</h3>
+    <h6>First load may take a while</h6>
+    <h6>subsequent reloads will be faster</h6>
+    <h3 class="loadslide">Loading...</h3>
+  </dialog>
+  <nav class="navbar" style="background-color: #000000">
+    <div class="app-header">
+      <a href="/">
+        <img style="width:100px" src="https://floe.evezor.com/static/logo.png" class="logo" />
+      </a>
+      <a class="title" href="https://floe.evezor.com/ide/66be3afe07e398bacanv"><button class="xsm_button green">View Canvas</button></a>
+      <a class="title" href="https://floe.evezor.com/view_code/66be3afe07e398bacanv"><button class="xsm_button green">View Code</button></a>
+      <a class="title" href="" style="color: #f0ab3c">ps1_lockers - Runnning on Pyscript</a>
+      <a href="https://www.crowdsupply.com/evezor-inc/tobor-robotics-and-automation-platform"><img style="height:50px; float:right; padding-top: 5px;" src="https://floe.evezor.com/static/crowd-supply-logo-dark.svg"></a>
+    </div>
+  </nav>
+  <button onclick="toggle_tab('main')">Main</button>
+  <button onclick="toggle_tab('files')">Files</button>
+  <!-- the main terminal -->
+  <div id="main">
+    <div>
+      <button class="toggler" onclick="toggleCollapsible(this)">-</button> Show Terminal
+      <div>
+        <div id="chat" class="terminal"></div>
+        <div id="input-chat" class="term_input" contenteditable="true"></div>
+        shift + enter for newline
+        <br><br>
+      </div>
+      <button onclick="toggle_all('collapse')" class="xsm_button green">collapse all</button>
+      <button onclick="toggle_all('expand')" class="xsm_button pink">expand all</button>
+    </div>
+    <br>
+    
+    <a href="https://www.crowdsupply.com/evezor-inc/tobor-robotics-and-automation-platform"><img style="height:50px; padding-top: 5px;" src="https://floe.evezor.com/static/crowd-supply-logo-dark.svg"></a><br>
+    We would really appreciate your support. <br>
+    Find out more and get source files and subscribe at <a class="title" href="" style="color: #f0ab3c">Crowd Supply</a>
+    <br>
+    
+    <button onclick="toggle_all('collapse')" class="xsm_button green">collapse all</button>
+    <button onclick="toggle_all('expand')" class="xsm_button pink">expand all</button>
+    <div id="parameters" style="display:flexbox;"></div> 
+  </div>
+  <div id="files" style="display: none;">
+    <button onclick="hermes.send('listdir', 'none')">listdir</button>
+    <div id="file_buttons"></div>
+    <h3 id="file_editor_filename">filename</h3>
+    <textarea style="overflow:scroll;height:fit-content;width: 90%; background-color: #304050; color: white" id="file_editor" contenteditable="true" spellcheck="false"></textarea>
+    <br>
+    <button onclick="hermes.save_file()">Save</button>
+  </div>
+  <div id="footer" style="height: 150px;">
+    <br><br>
+    <a href="https://www.crowdsupply.com/evezor-inc/tobor-robotics-and-automation-platform"><img style="height:50px; padding-top: 5px;" src="https://floe.evezor.com/static/crowd-supply-logo-dark.svg"></a><br>
+  We would really appreciate your support. <br>
+  Find out more and get source files at <a class="title" href="" style="color: #f0ab3c">Crowd Supply</a>
+  <hr>
+  Created with <a href="https://floe.evezor.com">Evezor Floe</a> Programming environment <br>
+    Find out more at <a href="https://evezor.com">evezor.com</a> <br>
+    Running on <a href="https://pyscript.net/">PyScript</a> 
+  </div>
+  <!-- end content area -->
+  <script type="text/javascript" src="https://floe.evezor.com/static/terminal.js?1732575252"></script>
+  <script type="text/javascript" src="https://floe.evezor.com/static/parameters.js?1732575252"></script>
+  <!-- parameter js -->
+  <script>
+  var GuiLockerPicker = {
+  lockers: {},  // pid: lockers
+  websockets: {},  // pid: Websocket
+  pids: {},  // name: pid
+  current_user: null,
+  getHTML: function (param) {
+    return `<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  }
+  th, td {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    text-align: left;
+  }
+  th {
+    background-color: #343a40;
+    color: #fff;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .large-text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .empty {
+    background-color: #04c004;
+    color: #fff;
+  }
+  .full {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .full-warning {
+    background-color: #ff9800;
+    color: #fff;
+  }
+  .owned {
+    background-color: #8928a7;
+    color: #fff;
+  }
+  .time-remaining {
+    font-weight: bold;
+    color: #dc3545;
+  }
+  .claim_button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+</style>
+<div class="parameter"  id="${param.pid}">
+  <h1>${param.name}</h1>
+  <table id="${param.pid}_lockersTable">
+  </table>
+</div>`
+  },
+  renderTable: function (pid) {
+    const table = document.getElementById(`${pid}_lockersTable`);
+    const lockers = this.lockers[pid]
+    // Clear existing rows
+    while (table.rows.length > 0) {
+      table.deleteRow(0);
+    }
+    const columnCount = lockers[0].length;
+    const columnWidth = 100 / columnCount;
+    lockers.forEach(row => {
+      const tr = document.createElement('tr');
+
+      row.forEach(locker => {
+        const timeRemaining = Math.round((new Date(locker.date) - new Date())/1000);
+        locker.timeRemaining = timeRemaining;
+        const td = document.createElement('td');
+        const timeRemainingText = locker.status === 'full' ? `<br>time remaining: <span class="time-remaining" data-address="${locker.address}">${this.formatTime(timeRemaining)}</span>` : '';
+        const dateText = locker.status === 'full' ? `<br>date: ${new Date(locker.date).toLocaleString()}` : '';
+        const claimButton = locker.status === 'empty' ? `<br><button class="claim_button" onclick="GuiLockerPicker.claimLocker(${pid}, ${locker.address})">Claim</button>` : '';
+        td.innerHTML = `name: ${locker.name || 'N/A'}<br>address: <span class="large-text">${locker.address}</span><br>status: ${locker.status}${dateText}${timeRemainingText}${claimButton}`;
+        td.className = this.getLockerClass(locker);
+        td.style.width = `${columnWidth}%`;
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
+  },
+  formatTime: function (seconds) {
+    const days = Math.floor(seconds / (24 * 3600));
+    seconds %= 24 * 3600;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${days}d ${hours}h ${minutes}m ${secs}s`;
+  },
+  getLockerClass: function (locker) {
+    if (locker.status === 'full') {
+      return locker.timeRemaining < 86400 ? 'full-warning' : 'full'; // 86400 seconds = 1 day
+    }
+    return locker.status;
+  },
+  updateTimeRemaining: function () {
+    const timeElements = document.querySelectorAll('.time-remaining');
+    timeElements.forEach(el => {
+      const address = parseInt(el.getAttribute('data-address'));
+      for (const lockers of Object.values(GuiLockerPicker.lockers)) {
+        const locker = lockers.flat().find(locker => locker.address === address);
+        if (locker && locker.timeRemaining > 0) {
+          locker.timeRemaining--;
+          el.textContent = GuiLockerPicker.formatTime(locker.timeRemaining);
+          el.closest('td').className = GuiLockerPicker.getLockerClass(locker);
+        }
+      }
+    });
+  },
+  updateLockerInfo: function (pid, name, address, status, days = 0) {
+    this.lockers[pid].forEach(row => {
+      row.forEach(locker => {
+        if (locker.address === address) {
+          locker.name = name;
+          locker.status = status;
+          if (status === 'full') {
+            locker.date = new Date();
+            locker.date.setSeconds(locker.date.getSeconds() + days * 24 * 3600);
+            locker.timeRemaining = days * 24 * 3600; // Convert days to seconds
+          } else {
+            delete locker.date;
+            delete locker.timeRemaining;
+          }
+        }
+      });
+    });
+    this.renderTable(pid);
+  },
+  claimLocker: function (pid, address) {
+    GuiLockerPicker.setClaimButtons('hide');
+    if (confirm(`Claim button clicked for locker with pid, address: ${pid}, ${address}`)) {
+      console.log(`${GuiLockerPicker.current_user} wants locker ${address}`);
+      // this is a hack. Fix once you understand better what should happen
+      if (GuiLockerPicker.websockets){
+        let pod = Object.keys(GuiLockerPicker.websockets)[0];
+        let _ws = GuiLockerPicker.websockets[pod];
+        let msg = JSON.stringify({
+          cmd: 'claim',
+          name: GuiLockerPicker.current_user,
+          address: address,
+          pod: pod,
+        });
+        console.log(msg);
+        _ws.send(msg)
+      }
+      hermes.send_json(pid, {
+        cmd: 'get_locker', 
+        user: GuiLockerPicker.current_user,
+        pid: pid,
+        address: address,
+      })
+    }
+  },
+  setClaimButtons: function (display) {
+    const buttons = document.getElementsByClassName('claim_button');
+    for (const button of buttons) {
+      if (display === 'hide') {
+        button.style.display = 'none';
+      }
+      else {
+        button.style.display = 'inline-block';
+      }
+    }
+  },
+  init: function (param) {
+    console.log('POD', param.pod)
+    this.lockers[param.pid] = param.pod
+    this.pids[param.name] = param.pid
+    if (param.websocket != "") {
+      let gl_ws = new WebSocket(param.websocket);
+      this.websockets[param.name] = gl_ws;
+      let self = this;
+      gl_ws.onmessage = function (event) {
+        let cmd = JSON.parse(event.data)
+        if (cmd.cmd === 'connected') {
+          // { cmd: "connected", name: "pallet_racks" }
+          console.log('connected', cmd);
+          let resp = JSON.stringify({cmd: 'get', 'name': cmd.name})
+          self.websockets[cmd.name].send(resp)
+        }
+        if (cmd.cmd === 'renderTable') {
+          // {cmd: renderTable, name: name, pod: dict}
+          console.log('renderTable', cmd);
+          let pid = self.pids[cmd.name]
+          self.lockers[pid] = cmd.pod;
+          self.renderTable(pid)
+        }
+        if (cmd.cmd == 'choose_locker') {
+          console.log(this)
+          GuiLockerPicker.current_user = cmd.user
+          GuiLockerPicker.setClaimButtons('show');
+          setTimeout(() => GuiLockerPicker.setClaimButtons('hide'), 30000);
+      	}
+      }
+    }
+    else {
+      // We must just be running locally and have a pod
+      this.renderTable(param.pid)
+    }
+    setInterval(this.updateTimeRemaining, 1000);
+    hermes.p[param.pid] = function (pid, data) {
+      data = JSON.parse(data);
+      console.log(data)
+      if (data['cmd'] == 'update_locker') {
+        GuiLockerPicker.updateLockerInfo(pid, data.name, data.address, data.status, data.days)
+      }
+      if (data['cmd'] == 'choose_locker') {
+        console.log(this)
+        GuiLockerPicker.current_user = data.user
+        GuiLockerPicker.setClaimButtons('show');
+        setTimeout(() => GuiLockerPicker.setClaimButtons('hide'), 30000);
+      }
+      if (data['cmd'] == 'render_table') {
+        console.log(data);
+        GuiLockerPicker.lockers[pid] = data.pod
+        GuiLockerPicker.renderTable(pid)
+      }
+    }
+  },
+}
+
+  </script>
+  
+  <script>
+    var websocket = {
+      msgs: [],
+      send: function(arg){
+        this.msgs.push(arg)
+      }
+    }
+    hermes.websocket = websocket
+  </script>
+  <script type="module">
+    const loading = document.getElementById('loading');
+    
+    addEventListener('py:ready', () => loading.close());
+    addEventListener('mpy:ready', () => loading.close());
+    loading.showModal();
+    
+  </script>
+
+<script type="mpy">
+
+from iris import Iris
+import os, json, asyncio
+import js
+import time
+iris = Iris()
+
+def do_repl(code: str):
+  # print('repling', code)
+  code.replace('<br>', '\n')
+  code.replace('&nbsp;', ' ')
+  try:
+    _return = str(eval(code, globals(), iris.locals)).strip('<>')
+    return f">>> {code}\n{_return}"
+
+  except SyntaxError:
+    try:
+      exec(compile(code, 'input', 'single'), globals(), iris.locals)
+      return f">>> {code}"
+    except Exception as e:
+      return f">>> {code}\n{e}"
+
+  except Exception as e:
+    return f">>> {code}\n{e}"
+
+def process(msg):
+  # print(msg)
+  comma = msg.find(',')
+  if comma == -1:
+    return f'unknwn thing from socket {msg}'
+  pid = msg[:comma]
+  data = msg[comma+1:]
+
+  if not msg:
+    return
+
+  if pid == 'term':
+    # code = data.decode("utf-8")
+    evt = f'term,{do_repl(data)}'
+    js.doMessage(evt)
+    return
+  elif pid == 'listdir':
+    files = os.listdir()
+    if 'sd' in files:
+        files.extend([f'sd/{file}' for file in os.listdir('sd')])
+    files = json.dumps({'cmd': 'listdir', 'data': files})
+    js.doMessage(f'listdir,{files}')
+    return
+  elif pid == 'get_file':
+    with open(data, 'r') as f:
+      js.doMessage(f'to_file_editor,{data},{f.read()}')
+    return
+  elif pid == 'save_file':
+    if data[:3] == 'new':
+      print('second_comma', data.find(',', 5))
+      iris.open_file = 'something.py'
+    print(data)
+    return
+
+  pid = int(pid)
+  if data == 'true':
+    data = True
+  if data == 'false':
+    data = False
+
+  try:
+  # print('processing', pid, data)
+    iris.p[pid](data, gui=True)
+  except Exception as e:
+    print('exception', e)
+
+import config
+
+
+config.setup(iris)
+iris.boot()
+js.websocket.send = process
+# js.build_from_json(json.dumps(iris.webstuff))
+
+loop = asyncio.get_event_loop()
+
+
+loop.create_task(iris.bifrost.pyscript_chk(js.doMessage, iris, 'mpy'))
+
+
+async def wait_for_startup():
+  ready = await iris.wait_for_startup()
+  js.build_from_json(iris.get_gui())
+
+loop.create_task(wait_for_startup())
+
+</script>
+<script>
+  getElmById("input-chat").addEventListener("keydown", onChatLine);
+  getElmById("input-chat").addEventListener("keyup", clearChatLine);
+  getElmById("input-chat").focus();
+
+  function toggle_tab(tab) {
+
+    if (tab == 'main') {
+      document.getElementById('main').style.display = 'block';
+      document.getElementById('files').style.display = 'none';
+    }
+    else if (tab == 'files') {
+      document.getElementById('main').style.display = 'none';
+      document.getElementById('files').style.display = 'block';
+    }
+  }
+
+</script>
+
+</body>
+</html>
