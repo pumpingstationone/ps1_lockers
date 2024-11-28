@@ -1,0 +1,32 @@
+{
+  "ColorChase": {
+    "ports": {
+      "dot_color": {
+        "type": "input",
+        "datatype": "rgb",
+        "default": null
+      },
+      "fill_color": {
+        "type": "input",
+        "datatype": "rgb",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "NeoPixelAnimation",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "rgb",
+    "up": {
+      "can_go_up": false,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

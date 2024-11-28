@@ -1,0 +1,59 @@
+{
+  "Hx711": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "tare": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "float",
+        "default": 0
+      },
+      "self": {
+        "type": "output",
+        "datatype": "Hx711",
+        "default": null
+      }
+    },
+    "constants": {
+      "d_out": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin number on mcu"
+      },
+      "pd_sck": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin number on mcu"
+      },
+      "channel": {
+        "type": "select",
+        "options": {
+          "CHANNEL_A_128": "CHANNEL_A_128",
+          "CHANNEL_A_64": "CHANNEL_A_64",
+          "CHANNEL_B_32": "CHANNEL_B_32"
+        },
+        "state": "CHANNEL_A_128",
+        "help": "select the attenuation"
+      }
+    },
+    "size": [
+      75,
+      40
+    ],
+    "datatype": "float",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

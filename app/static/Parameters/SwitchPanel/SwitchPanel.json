@@ -1,0 +1,44 @@
+{
+  "SwitchPanel": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": true
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "SwitchPanel",
+        "default": null
+      }
+    },
+    "size": [
+      70,
+      45
+    ],
+    "datatype": "string",
+    "constants": {
+      "output_pins": {
+        "type": "text",
+        "state": "[]",
+        "help": "physical pins for the output side\nsent as a json list"
+      },
+      "input_pins": {
+        "type": "text",
+        "state": "[]",
+        "help": "physical pins for the input side\nsent as a json list"
+      }
+    },
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

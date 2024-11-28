@@ -1,0 +1,45 @@
+{
+  "NumberpadMatrix": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": true
+      },
+
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "NumberpadMatrix",
+        "default": null
+      }
+    },
+    "size": [
+      90,
+      45
+    ],
+    "datatype": "string",
+    "constants": {
+      "column_pins": {
+        "type": "text",
+        "state": "[]",
+        "help": "pins in the column\nsent as json list"
+      },
+      "row_pins": {
+        "type": "text",
+        "state": "[]",
+        "help": "pins in the row\nsent as a json list"
+      }
+    },
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

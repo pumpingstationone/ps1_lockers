@@ -1,0 +1,37 @@
+{
+  "GuiCheckbox": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "bool",
+        "default": null
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "bool",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiCheckbox",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "both",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

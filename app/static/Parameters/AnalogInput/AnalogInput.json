@@ -1,0 +1,54 @@
+{
+  "AnalogInput": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "delay": {
+        "type": "input",
+        "datatype": "int",
+        "default": 50
+      },
+      "event": {
+        "type": "output",
+        "datatype": "float",
+        "default": 0
+      },
+      "self": {
+        "type": "output",
+        "datatype": "AnalogInput",
+        "default": null
+      }
+    },
+    "constants": {
+      "pin": {
+        "type": "number",
+        "state": "0",
+        "help": "pin number on mcu"
+      },
+      "ring_size": {
+        "type": "number",
+        "state": 10,
+        "help": "smoothing constant\nsize of list values are averaged over"
+      },
+      "noise_reduction": {
+        "type": "number",
+        "state": 100,
+        "help": "threshold value\nvalues will not be sent unless change is greater than noise_reduction"
+      }
+    },
+    "size": [
+      95,
+      65
+    ],
+    "datatype": "float",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

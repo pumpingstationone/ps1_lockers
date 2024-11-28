@@ -1,0 +1,40 @@
+{
+  "If": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "bool",
+        "default": null
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "invert": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "if_true": {
+        "type": "output",
+        "datatype": "any",
+        "default": null
+      },
+      "else": {
+        "type": "output",
+        "datatype": "any",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      50
+    ],
+    "datatype": "None",
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": true
+  }
+}

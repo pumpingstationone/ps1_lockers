@@ -1,0 +1,70 @@
+{
+  "SimpleFeeder": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "bool",
+        "default": null
+      },
+      "duty_retract": {
+        "type": "input",
+        "datatype": "int",
+        "default": 130
+      },
+      "duty_feed": {
+        "type": "input",
+        "datatype": "int",
+        "default": 210
+      },
+      "len_part": {
+        "type": "input",
+        "datatype": "int",
+        "default": 1
+      },
+      "event": {
+        "type": "output",
+        "datatype": "bool",
+        "default": false
+      },
+      "self": {
+        "type": "output",
+        "datatype": "SimpleFeeder",
+        "default": null
+      }
+    },
+    "constants": {
+      "button_pin": {
+        "type": "number",
+        "state": "0"
+      },
+      "button_pullup": {
+        "type": "select",
+        "options": {
+          "None": "None",
+          "pullup": "pullup",
+          "pulldown": "pulldown"
+        },
+        "state": "None"
+      },
+      "servo_pin": {
+        "type": "number",
+        "state": "0"
+      },
+      "freq": {
+        "type": "number",
+        "state": "100"
+      }
+    },
+    "size": [
+      100,
+      55
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

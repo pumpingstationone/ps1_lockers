@@ -1,0 +1,82 @@
+{
+  "GRBLScara": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "JSON,JSON",
+        "default": null
+      },
+      "theta_encoder": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "phi_encoder": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "UART": {
+        "type": "input",
+        "datatype": "UART",
+        "default": null
+      },
+      "x": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "y": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "z": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "a": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "b": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "c": {
+        "type": "input",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "kinematics": {
+        "type": "input",
+        "datatype": "ScaraKinematics",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "any",
+        "default": null
+      }
+    },
+    "constants": {
+      "webserver_output": {
+        "type": "checkbox",
+        "state": true,
+        "help": "send messages to gui\ndefault: True"
+      }
+    },
+    "size": [
+      85,
+      200
+    ],
+    "datatype": null,
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": false
+  }
+}

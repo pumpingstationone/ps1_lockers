@@ -1,0 +1,47 @@
+{
+  "GuiCodeTester": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "description": {
+        "type": "input",
+        "datatype": "string",
+        "default": ""
+      },
+      "code": {
+        "type": "input",
+        "datatype": "string",
+        "default": ""
+      },
+      "buttons": {
+        "type": "input",
+        "datatype": "JSON",
+        "default": "{}"
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiCodeEditor",
+        "default": null
+      }
+    },
+    "size": [
+      115,
+      35
+    ],
+    "datatype": "any",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

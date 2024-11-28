@@ -1,0 +1,27 @@
+{
+  "NeoArrayColorSwirl": {
+    "ports": {
+      "invert": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "self": {
+        "type": "output",
+        "datatype": "NeoArrayAnimation",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "rgb",
+    "up": {
+      "can_go_up": false,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

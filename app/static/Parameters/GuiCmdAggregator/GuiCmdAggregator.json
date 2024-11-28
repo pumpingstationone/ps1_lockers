@@ -1,0 +1,37 @@
+{
+  "GuiCmdAggregator": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "string",
+        "default": ""
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiCmdAggregator",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "both",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

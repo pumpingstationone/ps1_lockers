@@ -1,0 +1,37 @@
+{
+  "GuiFloat": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "float",
+        "default": 0
+      },
+      "event": {
+        "type": "output",
+        "datatype": "float",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiFloat",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

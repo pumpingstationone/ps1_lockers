@@ -1,0 +1,27 @@
+{
+  "ESP32Camera": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "ESP32Camera",
+        "default": null
+      }
+    },
+    "size": [
+      95,
+      65
+    ],
+    "datatype": "bytearray",
+    "up": {
+      "can_go_up": false,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "WebsocketServer": {
+    "ports": {
+      "self": {
+        "type": "output",
+        "datatype": "WebServer",
+        "default": null
+      }
+    },
+    "size": [
+      115,
+      35
+    ],
+    "datatype": "null",
+    "up": {
+      "can_go_up": false,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "GRBLAxis": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "move": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "max": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "min": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "home": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "reset": {
+        "type": "input",
+        "datatype": "DigitalOutput",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GRBLAxis",
+        "default": null
+      },
+      "reset_event": {
+        "type": "output",
+        "datatype": "any",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      100
+    ],
+    "datatype": null,
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": false
+  }
+}

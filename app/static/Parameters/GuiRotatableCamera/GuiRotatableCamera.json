@@ -1,0 +1,37 @@
+{
+  "GuiRotatableCamera": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "int",
+        "default": 0
+      },
+      "url": {
+        "type": "input",
+        "datatype": "string",
+        "default": ""
+      },
+      "event": {
+        "type": "output",
+        "datatype": "int",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiRotatableCamera",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

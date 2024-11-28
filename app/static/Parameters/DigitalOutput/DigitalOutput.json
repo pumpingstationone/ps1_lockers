@@ -1,0 +1,49 @@
+{
+  "DigitalOutput": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "bool",
+        "default": true
+      },
+      "invert": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "bool",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "DigitalOutput",
+        "default": null
+      }
+    },
+    "size": [
+      95,
+      50
+    ],
+    "datatype": "bool",
+    "constants": {
+      "pin": {
+        "type": "number",
+        "state": "0",
+        "help": "pin number on mcu"
+      }
+    },
+    "up": {
+      "can_go_up": true,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "Pcf8563": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "JSON",
+        "default": null
+      },
+      "i2c": {
+        "type": "input",
+        "datatype": "I2C",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "bool",
+        "default": 0
+      },
+      "self": {
+        "type": "output",
+        "datatype": "Pcf8563",
+        "default": null
+      }
+    },
+    "constants": {
+    },
+    "size": [
+      75,
+      40
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

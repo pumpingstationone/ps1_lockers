@@ -1,0 +1,37 @@
+{
+  "GuiTextbox": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "initial_value": {
+        "type": "input",
+        "datatype": "string",
+        "default": ""
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "GuiTextbox",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "string",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

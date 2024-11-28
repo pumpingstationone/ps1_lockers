@@ -1,0 +1,49 @@
+{
+  "GuiPnpFeeder": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "int",
+        "default": null
+      },
+      "rack": {
+        "type": "input",
+        "datatype": "JSON",
+        "default": false
+      },
+      "machine": {
+        "type": "input",
+        "datatype": "GRBL",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "int",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "JSON",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "int",
+    "up": {
+      "can_go_up": true,
+      "type": "both",
+      "order": 999
+    },
+    "constants": {
+      "num_feeders": {
+        "type": "number",
+        "state": 8,
+        "help": "the number of feeders in the rack"
+      }
+    },
+    "broadcast": true
+  }
+}

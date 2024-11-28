@@ -1,0 +1,26 @@
+{
+  "Gene": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "any",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "Gene",
+        "default": null
+      }
+    },
+    "constants": {},
+    "size": [
+      65,
+      45
+    ],
+    "datatype": "none",
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": false
+  }
+}

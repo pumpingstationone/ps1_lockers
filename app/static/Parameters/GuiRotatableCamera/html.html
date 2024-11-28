@@ -1,0 +1,30 @@
+<div class="parameter" style="width:500px;">
+  <span style="font-size: large;">${param.name}</span>
+  <span style="float:right;">pid: ${param.pid}</span><button class="toggler" onclick="toggleCollapsible(this)" style="float:right;">-</button>
+  <div>
+    <button class="xsm_button green" onclick="GuiRotatableCamera.show_crosshair(${param.pid}, 'visible')">
+      show crosshair
+    </button>
+    <button class="xsm_button red" onclick="GuiRotatableCamera.show_crosshair(${param.pid}, 'hidden')">
+      hide crosshair
+    </button>
+    <button class="xsm_button pink" onclick="reload_cam('${param.pid}')">
+      reload camera
+    </button>
+    <table>
+      <tr>
+        <td>current rotation: </td>
+        <td id="${param.pid}_deg" style="width:40px">180</td>
+        <td>camera location</td>
+        <td id="cam_loc">${param.url}</td>
+      </tr>
+    </table>
+    <div style="width: 95%;" class="slide_container parameter">deg offset<input type="range" min="0" max="359"
+        value="180" class="slider" oninput="GuiRotatableCamera.rotate_cam(${param.pid}, this)" id="${param.pid}_slider">
+    </div>
+    <img id="${param.pid}" src="${param.url}" height="480" width="480" title="Iframe Example"
+      style="transform:rotate(0deg); object-fit:none; border-radius:50%;">
+    <img id="${param.pid}_crosshair" src="../static/crosshair.png"
+      style="position:relative; left: 140px; bottom: 347px; height:200px; width:200px">
+  </div>
+</div>

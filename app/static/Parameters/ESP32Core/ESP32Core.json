@@ -1,0 +1,52 @@
+{
+  "ESP32Core": {
+    "ports": {
+      "hbt_led": {
+        "type": "input",
+        "datatype": "hbt_led",
+        "default": null
+      },
+      "neo_status": {
+        "type": "input",
+        "datatype": "NeoPixel",
+        "default": null
+      },
+      "function_button": {
+        "type": "input",
+        "datatype": "bool",
+        "default": null
+      },
+      "bus": {
+        "type": "input",
+        "datatype": "bus",
+        "default": null
+      },
+      "zorg": {
+        "type": "input",
+        "datatype": "Zorg",
+        "default": null
+      },
+      "webserver": {
+        "type": "input",
+        "datatype": "WebServer",
+        "default": null
+      }
+    },
+    "size": [
+      85,
+      420
+    ],
+    "datatype": null,
+    "constants": {
+      "wifi": {
+        "type": "checkbox",
+        "state": false,
+        "help": "turn on wifi antenna"
+      }
+    },
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": false
+  }
+}

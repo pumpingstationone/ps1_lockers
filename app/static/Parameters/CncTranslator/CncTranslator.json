@@ -1,0 +1,59 @@
+{
+  "CncTranslator": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": true
+      },
+      "x_offset": {
+        "type": "input",
+        "datatype": "float",
+        "default": 0
+      },
+      "y_offset": {
+        "type": "input",
+        "datatype": "float",
+        "default": 0
+      },
+      "rotate": {
+        "type": "input",
+        "datatype": "float",
+        "default": 0
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "DigitalOutput",
+        "default": null
+      }
+    },
+    "size": [
+      95,
+      50
+    ],
+    "datatype": "string",
+    "constants": {
+      "initial_x": {
+        "type": "number",
+        "state": "0",
+        "help": "assumed machine starting x position"
+      },
+      "initial_y": {
+        "type": "number",
+        "state": "0",
+        "help": "assumed machine starting y position"
+      }
+    },
+    "up": {
+      "can_go_up": true,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

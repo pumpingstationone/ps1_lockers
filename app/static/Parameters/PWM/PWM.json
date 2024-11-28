@@ -1,0 +1,64 @@
+{
+  "PWM": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "bool",
+        "default": null
+      },
+      "freq": {
+        "type": "input",
+        "datatype": "int",
+        "default": null
+      },
+      "duty": {
+        "type": "input",
+        "datatype": "float",
+        "default": null
+      },
+      "duty_min": {
+        "type": "input",
+        "datatype": "float",
+        "default": 0
+      },
+      "duty_max": {
+        "type": "input",
+        "datatype": "float",
+        "default": 1
+      },
+      "invert_duty": {
+        "type": "input",
+        "datatype": "bool",
+        "default": false
+      },
+      "event": {
+        "type": "output",
+        "datatype": "bool",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "PWM",
+        "default": null
+      }
+    },
+    "constants": {
+      "pin": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin on the mcu"
+      }
+    },
+    "size": [
+      85,
+      65
+    ],
+    "datatype": "bool",
+    "up": {
+      "can_go_up": true,
+      "type": "input",
+      "order": 999
+    },
+    "broadcast": false
+  }
+}

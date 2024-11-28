@@ -1,0 +1,42 @@
+{
+  "Inkscape": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": true
+      },
+      "tool_on": {
+        "type": "input",
+        "datatype": "JSON",
+        "default": null
+      },
+      "tool_off": {
+        "type": "input",
+        "datatype": "JSON",
+        "default": null
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": null
+      },
+      "self": {
+        "type": "output",
+        "datatype": "Inkscape",
+        "default": null
+      }
+    },
+    "size": [
+      75,
+      35
+    ],
+    "datatype": "string",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

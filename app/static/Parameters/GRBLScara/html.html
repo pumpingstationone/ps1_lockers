@@ -1,0 +1,367 @@
+<div style="max-width: 750px;" class="parameter">
+  <span style="font-size: large;">${param.name}</span>
+  <span style="float:right;">pid: ${param.pid}</span><button class="toggler" onclick="toggleCollapsible(this)" style="float:right;">-</button>
+  <div>
+    <div id="${param.pid}_tabs">
+      <button class="xsm_button green" onclick="GRBLScara.tabs(event, ${param.pid}, 'machine')">Machine</button>
+      <button class="xsm_button blue" onclick="GRBLScara.tabs(event, ${param.pid}, 'work_offsets')">Work Offsets</button>
+      <button class="xsm_button blue" onclick="GRBLScara.tabs(event, ${param.pid}, 'tool_offsets')">Tool Offsets</button>
+      <button class="xsm_button blue" onclick="GRBLScara.tabs(event, ${param.pid}, 'term_tab')">Terminal</button>
+    </div>
+    <div id="${param.pid}_term_tab" style="display: none">
+      <div><label class="checkbox_container">show status messages<input id="${param.pid}_show_status" type="checkbox"><span
+                                                                                                                            class="checkmark"></span></label></div>
+      <div id="${param.pid}_terminal" class="terminal"></div>
+      <div id="${param.pid}_input" class="term_input" contenteditable="true"></div>
+      <span style="font-size: 12px; color: grey;">please note this terminal is a direct line to GRBL. It is NOT for python
+        code input. please use regular terminal for that. </span><br><br>
+      <table id="machine_table">
+        <tr>
+          <td>$/axes/x/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/x/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/x/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/x/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/y/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/y/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/y/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/y/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/z/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/z/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/z/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/z/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/a/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/a/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/a/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/a/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/b/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/b/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/b/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/b/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/c/steps_per_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/c/max_rate_mm_per_min</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/c/acceleration_mm_per_sec2</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+        <tr>
+          <td>$/axes/c/max_travel_mm</td>  
+          <td><input type="number"></td>
+          <td><button onclick="GRBLScara.machine(${param.pid}, this, 'set')">set</button><button onclick="GRBLScara.machine(${param.pid}, this, 'get')">get</button></td>
+        </tr>
+      </table>
+
+
+    </div>
+    <div id="${param.pid}_machine" style="display: block">
+      <div style="width: 95%;">
+        <table id="${param.pid}_machine_table" style="width: 100%;">
+          <tr>
+            <td colspan="2">Move Machine:</td>
+            <td>Position</td>
+            <td>Offset</td>
+            <td>Absolute Pos</td>
+            <td colspan="2">Encoders</td>
+          </tr>
+          <tr>
+            <td style="width: 5px;"><strong>t: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_x"></td>
+            <td>
+              <div id="${param.pid}_xpos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_xoffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_xabs">None</div>
+            </td>
+            <td style="width: 5px;">Theta:</td>
+            <td>
+              <div id="${param.pid}_theta_enc">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>p: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_y"></td>
+            <td>
+              <div id="${param.pid}_ypos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_yoffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_yabs">None</div>
+            </td>
+            <td>Phi:</td>
+            <td>
+              <div id="${param.pid}_phi_enc">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>z: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_z"></td>
+            <td>
+              <div id="${param.pid}_zpos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_zoffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_zabs">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 5px;"><strong>a: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_a"></td>
+            <td>
+              <div id="${param.pid}_apos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_aoffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_aabs">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>b: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_b"></td>
+            <td>
+              <div id="${param.pid}_bpos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_boffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_babs">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>c: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_c"></td>
+            <td>
+              <div id="${param.pid}_cpos">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_coffset">None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_cabs">None</div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>feed: </strong></td>
+            <td><input type="number" style="width: 100%;" id="${param.pid}move_f" value="500"></td>
+            <td>
+              <div id="${param.pid}_state">Status: None</div>
+            </td>
+            <td>
+              <div id="${param.pid}_offset_name">Name: None</div>
+            </td>
+            <td>
+
+            </td>
+            <td colspan="2">
+              <div id="${param.pid}_blinker"
+                   style="height:15px; width:15px; background-color: rgb(11, 111, 93); border: 1px solid black; border-radius: 8px;">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsphbt</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <button id="${param.pid}move_submit"
+              onclick="hermes.send_json(${param.pid}, {'cmd': 'move.linear', 'x': gid('${param.pid}move_x').value, 'y': gid('${param.pid}move_y').value, 'z': gid('${param.pid}move_z').value, 'a': gid('${param.pid}move_a').value, 'b': gid('${param.pid}move_b').value, 'c': gid('${param.pid}move_c').value, 'feed':gid('${param.pid}move_f').value})"
+              class="sm_button green">Move</button><br>
+      cartesian position: 
+      <span style="font-size: large;"> X: </span>
+      <span id="${param.pid}_cart_x">000.00</span>
+      <span style="font-size: large;"> Y: </span>
+      <span id="${param.pid}_cart_y">000.00</span>
+      <span style="font-size: large;"> Z: </span>
+      <span id="${param.pid}_cart_z">000.00</span>
+      <span style="font-size: large;"> A: </span>
+      <span id="${param.pid}_cart_a">000.00</span>  
+      <br>
+    </div>
+    <div id="${param.pid}_work_offsets" style="display: none">
+      <div style="width: 95%;">
+
+        <table id="${param.pid}_work_offsets_table" style="width: 100%;">
+          <tr>
+            <td>offset:</td>
+            <td>Name</td>
+            <td>X</td>
+            <td>Y</td>
+            <td>Z</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_0" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,0)">0</td>
+            <td><input type="text" value="machine"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 0)">set</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_1" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,1)">1</td>
+            <td><input type="text" value="G54"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 1)">set</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_2" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,2)">2</td>
+            <td><input type="text" value="G55"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 2)">set</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_3" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,3)">3</td>
+            <td><input type="text" value="G56"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 3)">set</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_4" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,4)">4</td>
+            <td><input type="text" value="G57"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 4)">set</button></td>
+          </tr>
+          <tr>
+            <td><input type="radio" id="${param.pid}_radio_offset_5" name="${param.pid}_radio_offset" onchange="GRBLScara.change_work_offset(${param.pid} ,5)">5</td>
+            <td><input type="text" value="G58"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><input type="number" style="min-width:55px;" value="0"></td>
+            <td><button class="xsm_button blue" onclick="GRBLScara.send(${param.pid}, 'req_w_offset', 5)">set</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="${param.pid}_tool_offsets" style="display: none">
+      <div style="width: 95%;">
+        <h3>Coming Soon</h3>
+      </div>
+    </div>
+    
+    <hr>
+
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'disable_motors'})" class="sm_button red">disable_motors</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'enable_motors'})" class="sm_button green">enable_motors</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'unlock'})" class="sm_button blue">unlock</button>
+    <hr>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_x'})" class="sm_button blue">home_theta</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_y'})" class="sm_button blue">home_phi</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_z'})" class="sm_button blue">home_z</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_a'})" class="sm_button blue">home_a</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_b'})" class="sm_button blue">home_b</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'home_c'})" class="sm_button blue">home_c</button><br>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'reset_x'})" class="sm_button coral">reset_theta</button>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'reset_y'})" class="sm_button coral">reset_phi</button>
+    <hr>
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'listdir'})" class="sm_button coral">listdir</button>
+    run script: <input style="width: 50%;" id="${param.pid}_script">
+    <button onclick="hermes.send_json(${param.pid}, {'cmd': 'run', 'script': gid('${param.pid}_script').value})" class="sm_button blue">open file</button>
+  </div>
+</div>

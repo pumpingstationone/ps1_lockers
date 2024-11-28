@@ -1,0 +1,42 @@
+{
+  "MCP23017": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "float32",
+        "default": null
+      },
+      "adr": {
+        "type": "input",
+        "datatype": "int16",
+        "default": null
+      },
+      "i2c": {
+        "type": "input",
+        "datatype": "I2C",
+        "default": null
+      },
+      "event": {
+        "type": "output",
+        "datatype": "float32",
+        "default": 0
+      },
+      "self": {
+        "type": "output",
+        "datatype": "AS5048B_Encoder",
+        "default": null
+      }
+    },
+    "size": [
+      120,
+      70
+    ],
+    "datatype": "float32",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}

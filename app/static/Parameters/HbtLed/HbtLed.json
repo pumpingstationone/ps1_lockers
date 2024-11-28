@@ -1,0 +1,32 @@
+{
+  "HbtLed": {
+    "ports": {
+      "delay": {
+        "type": "input",
+        "datatype": "int",
+        "default": 1000
+      },
+      "self": {
+        "type": "output",
+        "datatype": "hbt_led",
+        "default": null
+      }
+    },
+    "constants": {
+      "pin": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin number on mcu"
+      }
+    },
+    "size": [
+      85,
+      40
+    ],
+    "datatype": "int",
+    "up": {
+      "can_go_up": false
+    },
+    "broadcast": false
+  }
+}

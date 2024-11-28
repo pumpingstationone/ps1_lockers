@@ -1,0 +1,59 @@
+{
+  "QrReader": {
+    "ports": {
+      "input": {
+        "type": "input",
+        "datatype": "string",
+        "default": null
+      },
+      "buzzer_obj": {
+        "type": "input",
+        "datatype": "PWM",
+        "default": null
+      },
+      "buzz_on_read": {
+        "type": "input",
+        "datatype": "bool",
+        "default": true
+      },
+      "event": {
+        "type": "output",
+        "datatype": "string",
+        "default": 0
+      },
+      "self": {
+        "type": "output",
+        "datatype": "QrReader",
+        "default": null
+      }
+    },
+    "constants": {
+      "rx": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin on the mcu"
+      },
+      "tx": {
+        "type": "number",
+        "state": "0",
+        "help": "physical pin on the mcu"
+      },
+      "uart": {
+        "type": "number",
+        "state": 1,
+        "help": "the bus to use\nbus 0 is used by repl"
+      }
+    },
+    "size": [
+      90,
+      45
+    ],
+    "datatype": "string",
+    "up": {
+      "can_go_up": true,
+      "type": "output",
+      "order": 999
+    },
+    "broadcast": true
+  }
+}
