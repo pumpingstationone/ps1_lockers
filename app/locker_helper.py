@@ -26,7 +26,7 @@ lockers = {
      {"name":"Anthony Lighthall","address":23,"status":"owned"},
      {"name":"Atticus Lazenby ","address":28,"status":"owned"}],
     
-    [{"name":"","address":4,"status":"empty"},
+    [{"name":"Micah Kephart","address":4,"status":"owned"},
      {"name":"","address":9,"status":"empty"},
      {"name":"","address":14,"status":"empty"},
      {"name":"Mark Nielsen","address":19,"status":"owned"},
@@ -34,7 +34,7 @@ lockers = {
      # {"name":"","address":29,"status":"empty"}],
      {"name":"test1","address":29,"status":"full","date":"2024-09-15T06:08:45.614Z"}],
     
-    [{"name":"","address":5,"status":"empty"},
+    [{"name":"Joshua Samos","address":5,"status":"owned"},
      {"name":"","address":10,"status":"empty"}, 
      {"name":"","address":15,"status":"empty"},
      {"name":"","address":20,"status":"empty"},

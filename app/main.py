@@ -32,6 +32,23 @@ async def heartbeat():
     while True:
         lh.package_lights(lh.lockers['neverland__pallet_racks'])
         await asyncio.sleep(10)
+        
+async def publish_to_sockets(socket_name, payload: dict):
+    if socket_name in open_sockets:
+        await open_sockets[socket_name].send_json(payload)
+
+async def process_mqtt(topic, payload):
+    device, locker_pod = topic.split('/')
+    print(locker_pod)
+    if device == 'ps1_lockers':        
+        if locker_pod in open_sockets:
+            print("found rfid for pod")
+            await publish_to_sockets(locker_pod, {'cmd': 'choose_locker', 'user': payload,}) 
+            print('sent')
+    elif device == 'rfid': 
+        tag_info = ldap.get_info_for_tag(payload)
+        name = tag_info['name']
+        await publish_to_sockets(locker_pod, {'cmd': 'choose_locker', 'user': name}) 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -46,7 +63,7 @@ async def lifespan(app: FastAPI):
         await mqtt.mqtt_shutdown()
     yield
     # shutdown code
-    
+        
 # ---
 # APP
 # --- 
@@ -74,15 +91,7 @@ def mqtt_connect(client, flags, rc, properties):
 async def message(client, topic, payload, qos, properties):
     data = payload.decode("utf-8")
     print("Received message: ", topic, data, qos, properties)
-    _, locker_pod = topic.split('/')
-    print(locker_pod)
-    if locker_pod in open_sockets:
-        print("found rfid for pod")
-        await open_sockets[locker_pod].send_json({
-            'cmd': 'choose_locker',
-            'user': data,
-        })
-        print('sent')
+    await process_mqtt(topic=topic, payload=data)
     return 0
 
 
@@ -110,27 +119,34 @@ async def home(request: Request):
 async def home(request: Request):
     return templates.TemplateResponse('topos.html', {'request': request})
 
-@app.get('/lockers_test', response_class=HTMLResponse)
+@app.get('/lockers', response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse('lockers.html', {'request': request})
+
+@app.get('/list_lockers', response_class=JSONResponse)
+async def home(request: Request):
+    return lh.lockers
+
+
+@app.get('/test', response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse('test.html', {'request': request})
 
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: Tag):
     tag = form_model.tag
-    if tag == 'fake_mqtt':
-        mqtt.publish("ps1_lockers/neverland__pallet_racks", "test_message12345")
-        return {'message': 'sent'}
-        
+    tag = tag.zfill(10)
     tag_info = ldap.get_info_for_tag(tag)
     return tag_info
 
 @app.post('/fake_mqtt', response_class=JSONResponse)
 async def f_model(request: Request, form_model: Tag):
-    tag = form_model.tag    
+    tag = form_model.tag 
+    tag = tag.zfill(10)   
     tag_info = ldap.get_info_for_tag(tag)
     if "Tag not found" in tag_info:
         return tag_info
-    mqtt.publish("ps1_lockers/neverland__pallet_racks", tag_info['name'])
+    mqtt.publish("ps1_lockers/neverland__pallet_racks", [tag_info['name'], tag_info['cn']])
     return tag_info
 
 
@@ -155,7 +171,7 @@ def process(cmd):
         # {cmd: 'claim', name: user, address: address, pod: pod}
         lh.claim_locker(cmd['pod'], cmd['name'], cmd['address'])
         return {
-            'cmd': 'renderTable',
+            'cmd': 'renderTable', # just rerender the whole thing because lazy
             'name': cmd['pod'],
             'pod': lh.lockers[cmd['pod']]    
         }

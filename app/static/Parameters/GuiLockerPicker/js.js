@@ -98,12 +98,18 @@ var GuiLockerPicker = {
         console.log(msg);
         _ws.send(msg)
       }
+      
+      // this is for edgeboards
       hermes.send_json(pid, {
         cmd: 'get_locker', 
         user: GuiLockerPicker.current_user,
         pid: pid,
         address: address,
       })
+
+      // this is for ps1
+      console.log('this socket', GuiLockerPicker.websockets[pid])
+
     }
   },
   setClaimButtons: function (display) {

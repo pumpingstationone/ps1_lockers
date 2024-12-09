@@ -14,7 +14,7 @@
   <hr>
 
   <h3>/get_tag</h3>
-  <form id="form_model" onsubmit="return create_fetch()">
+  <form id="form_model" onsubmit="return create_fetch('/get_tag')">
     <input type="text" name="tag" id="fm_form1" placeholder="tag#"><br>
     <input type="submit" value="Submit">
   </form> <br>
@@ -31,7 +31,9 @@
   <button onclick="fake_tag('0002755984', '/fake_mqtt')">0002755984</button>
   <button onclick="fake_tag('0002767727', '/fake_mqtt')">0002767727</button>
   <br><br><br><br>
-
+  <a href="/lockers"><button>/lockers - (currently broken)</button></a>
+  <a href="/list_lockers"><button>/list_lockers</button></a>
+  
   <script>
     function fake_tag(tag_num, url) {
       document.getElementById('fm_form1').value = tag_num;
@@ -60,7 +62,7 @@
       });
 
       if (!response.ok) {
-        console.log('problems');
+        document.getElementById('form_response').innerHTML = response;
       }
       const body = await response.json();
       console.log(body);

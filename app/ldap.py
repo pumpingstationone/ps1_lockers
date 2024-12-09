@@ -38,20 +38,13 @@ def get_info_for_tag(tag: str) -> dict|None:
 
         # Cool, we got something
         entry = conn.entries[0]
+        print(entry)
         
         # Print the information
         return {
             'ad_name': f"{entry.sAMAccountName}",
             'email': f"{entry.mail}",
-            'name': f'{entry.givenName} {entry.sn}'
+            'name': f'{entry.givenName} {entry.sn}',
+            'cn': f'{entry.cn}'
         }
         
-    
-
-# # Get the tag from the command line
-# if len(sys.argv) != 2:
-#     print('Usage: get-info-for-tag.py <tag>')
-#     sys.exit(1)
-
-# tag = sys.argv[1]
-# print(f"Search is: {search_filter.format(tag)}")
