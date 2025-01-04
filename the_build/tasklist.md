@@ -1,6 +1,6 @@
-# Lockers Build
+## Lockers Build
 
-Hey all, just want to make a bit of a schedule and let people know where and when we'll be working so we can best manage the space. 
+Hey all, just want to make a bit of a schedule and let people know where and when we'll be working so we can best manage the space. And thank you to everyone who voted. 
 
 ### General Overview
 There are over 500 pieces to make, so will take a bit of time. 
@@ -23,7 +23,7 @@ There are over 500 pieces to make, so will take a bit of time.
 
 ## Hopeful Schedule
 
-### Dec 23 Lumber will arrive
+Hopefully Dec 23 Lumber will arrive
 There will be over 50 pieces of 4x8 plywood
 
 Tasklist (roughly ordered)
