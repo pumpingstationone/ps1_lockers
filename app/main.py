@@ -43,6 +43,7 @@ async def process_mqtt(topic, payload):
     if device == 'ps1_lockers':        
         if locker_pod in open_sockets:
             print("found rfid for pod")
+    
             await publish_to_sockets(locker_pod, {'cmd': 'choose_locker', 'user': payload,}) 
             print('sent')
     elif device == 'rfid': 
@@ -163,7 +164,7 @@ def process(cmd):
     if command == 'get':
         # {cmd: get, pod:[pod_name]}
         return {
-            'cmd': 'renderTable',
+            'cmd': 'render_table',
             'name': cmd['name'],
             'pod': lh.lockers[cmd['name']]    
         }
@@ -171,7 +172,7 @@ def process(cmd):
         # {cmd: 'claim', name: user, address: address, pod: pod}
         lh.claim_locker(cmd['pod'], cmd['name'], cmd['address'])
         return {
-            'cmd': 'renderTable', # just rerender the whole thing because lazy
+            'cmd': 'render_table', # just rerender the whole thing because lazy
             'name': cmd['pod'],
             'pod': lh.lockers[cmd['pod']]    
         }
