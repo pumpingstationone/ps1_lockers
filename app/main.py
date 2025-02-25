@@ -157,6 +157,34 @@ async def get_pod(request: Request, pod: str=""):
     print(pod)
     return lh.lockers[pod]
 
+@app.get('/pod_admin/{pod}', response_class=HTMLResponse)
+async def get_pod(request: Request, pod: str=""):
+    
+    print(pod)
+    return templates.TemplateResponse('pod_admin.html', {'request': request, 'pod': pod, 'lockers': lh.lockers[pod]})
+
+
+def order_processor(order, boot=False):
+    data = order['data']
+    
+    if order['cmd'] == 'update_locker':
+        lh.update_locker(data)
+    
+    if boot:
+        return 
+    
+    with open(f'lockers/{data["pod"]}.txt', 'a') as f:
+        json.dump(order, f)
+        f.write('\n')
+        
+    return {"cmd": "populate_table", "data":lh.lockers[data['pod']]}
+
+@app.post('/orders', response_class=JSONResponse)
+async def get_pod(request: Request, order: dict):
+    print(order)
+    resp = order_processor(order)
+        
+    return resp
 
 def process(cmd):
     cmd = json.loads(cmd)
@@ -201,4 +229,12 @@ async def websocket_endpoint(
         print(f'{open_sockets = }')
         print(f'closing connection, stopping {locker_pod}')
         open_sockets.pop(locker_pod)
+
+
+### boot up and process lockers
+print('booting')
+for pod in os.listdir('lockers'):
+    with open(f"lockers/{pod}", 'r') as f:
+        for order in f:
+            order_processor(json.loads(order), boot=True)
 

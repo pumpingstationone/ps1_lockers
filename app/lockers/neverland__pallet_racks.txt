@@ -1,0 +1,2 @@
+{"cmd": "update_locker", "data": {"address": 23, "name": "test", "status": "empty", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 23, "name": "", "status": "empty", "pod": "neverland__pallet_racks"}}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Table</title>
+  <style>
+    body {
+      background-color: #2B2B2B;
+      color: #A9B7C6;
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #3C3F41;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #555;
+    }
+
+    th {
+      background-color: #4E5254;
+    }
+
+    input,
+    select {
+      background-color: #313335;
+      color: #A9B7C6;
+      border: 1px solid #555;
+      padding: 5px;
+    }
+
+    button {
+      background-color: #6897BB;
+      color: #FFFFFF;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="pod_name">{{ pod }}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <script>
+    function create_fetch(order) {
+      do_fetch(order)
+      return false
+    }
+
+    async function do_fetch(dict) {
+      console.log('post', dict)
+      const response = await fetch('/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dict)
+      });
+
+      if (!response.ok) {
+        console.log('error')
+        return;
+      }
+      const order = await response.json();
+      if (order.cmd == "populate_table") {
+        lockers_data = order.data;
+        populateTable();
+      }
+    }
+
+    var lockers_data = {{ lockers | safe}};
+
+    function populateTable() {
+      console.log('populateTable', lockers_data)
+      const tableBody = document.getElementById("table-body");
+      tableBody.innerHTML = "";
+      lockers_data.flat().forEach(entry => {
+        const row = document.createElement("tr");
+
+        const addressCell = document.createElement("td");
+        addressCell.textContent = entry.address;
+
+        const nameCell = document.createElement("td");
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.value = entry.name;
+
+        const statusCell = document.createElement("td");
+        const statusSelect = document.createElement("select");
+        ["owned", "rented", "empty"].forEach(status => {
+          const option = document.createElement("option");
+          option.value = status;
+          option.textContent = status;
+          if (entry.status === status) option.selected = true;
+          statusSelect.appendChild(option);
+        });
+
+        const actionCell = document.createElement("td");
+        const changeButton = document.createElement("button");
+        changeButton.id = `change-button-${entry.address}`;
+        changeButton.textContent = "Change";
+        changeButton.disabled = true;
+
+        function checkChanges() {
+          console.log(entry);
+          changeButton.disabled = false;
+        }
+
+
+
+        statusSelect.addEventListener("change", (e) => {
+          entry.status = e.target.value;
+          checkChanges(entry);
+        });
+
+        nameInput.addEventListener("input", (e) => {
+          entry.name = e.target.value;
+          statusSelect.value = 'owned';
+          entry.status = 'owned';
+          checkChanges();
+        });
+
+        changeButton.addEventListener("click", function () {
+          order =
+          {
+            cmd: "update_locker",
+            data: {
+              address: entry.address,
+              name: entry.name,
+              status: entry.status,
+              pod: "{{ pod }}"
+            }
+          }
+          create_fetch(order);
+        });
+
+        const emptyButton = document.createElement("button");
+        emptyButton.textContent = "Empty";
+        emptyButton.addEventListener("click", function () {
+          if (!confirm("Emptying locker " + entry.address)) {
+            return;
+          }
+          order = {
+            cmd: "update_locker",
+            data: {
+              address: entry.address,
+              name: "",
+              status: "empty",
+              pod: "{{ pod }}"
+            }
+          }
+          create_fetch(order);
+        });
+
+        nameCell.appendChild(nameInput);
+        statusCell.appendChild(statusSelect);
+        actionCell.appendChild(changeButton);
+        actionCell.appendChild(emptyButton);
+
+        row.appendChild(addressCell);
+        row.appendChild(nameCell);
+        row.appendChild(statusCell);
+        row.appendChild(actionCell);
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    populateTable();
+  </script>
+
+</body>
+
+</html>

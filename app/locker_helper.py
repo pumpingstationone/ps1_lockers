@@ -32,7 +32,7 @@ lockers = {
     [{"name":"","address":21,"status":"empty"},
      {"name":"","address":22,"status":"empty"},
      {"name":"","address":23,"status":"empty"},
-     {"name":"","address":24,"status":"empty"},
+     {"name":"Ian Sampson","address":24,"status":"owned"},
      {"name":"","address":25,"status":"empty"},
      {"name":"","address":26,"status":"empty"},
      {"name":"","address":27,"status":"empty"},
@@ -48,9 +48,9 @@ lockers = {
      {"name":"Michael Sprinker","address":35,"status":"owned"},
      {"name":"Avery","address":36,"status":"owned"},
      {"name":"Micah Kephart","address":37,"status":"owned"},
-     {"name":"Unknown","address":38,"status":"owned"},
+     {"name":"Nick Chiado","address":38,"status":"owned"},
      {"name":"Andrew Eubanks","address":39,"status":"owned"},
-     {"name":"Unknown","address":40,"status":"owned"},
+     {"name":"Brian Desmond","address":40,"status":"owned"},
      ],
     
     [{"name":"Maria Savrasova","address":41,"status":"owned"},
@@ -97,6 +97,24 @@ def claim_locker(pod, user, address):
         for locker in row:
             if locker['address'] == address:
                 locker.update(new_state)
+                
+def update_locker(data):
+    # print(data)
+    pod = data['pod']
+    address = data['address']
+    new_state = data['status']
+    
+    for row in lockers[pod]:
+        for locker in row:
+            if locker['address'] == address:
+                locker['status'] = new_state
+                locker['name'] = data['name']
+                # if new_state == 'empty':
+                #     locker['date'] = None
+                # else:
+                #     future_time = datetime.now() + timedelta(hours=24)
+                #     future_time = future_time.isoformat() + "Z"
+                #     locker['date'] = future_time
 
 def package_lights(pod):
     colors = {
