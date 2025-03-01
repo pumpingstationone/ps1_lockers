@@ -125,13 +125,9 @@ async def home(request: Request):
     return templates.TemplateResponse('lockers.html', {'request': request})
 
 @app.get('/list_lockers', response_class=JSONResponse)
-async def home(request: Request):
+async def list_lockers(request: Request):
     return lh.lockers
 
-
-@app.get('/test', response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse('test.html', {'request': request})
 
 @app.post('/get_tag', response_class=JSONResponse)
 async def f_model(request: Request, form_model: Tag):
@@ -141,7 +137,7 @@ async def f_model(request: Request, form_model: Tag):
     return tag_info
 
 @app.post('/fake_mqtt', response_class=JSONResponse)
-async def f_model(request: Request, form_model: Tag):
+async def fake_mqtt(request: Request, form_model: Tag):
     tag = form_model.tag 
     tag = tag.zfill(10)   
     tag_info = ldap.get_info_for_tag(tag)
@@ -158,7 +154,7 @@ async def get_pod(request: Request, pod: str=""):
     return lh.lockers[pod]
 
 @app.get('/pod_admin/{pod}', response_class=HTMLResponse)
-async def get_pod(request: Request, pod: str=""):
+async def pod_admin(request: Request, pod: str=""):
     
     print(pod)
     return templates.TemplateResponse('pod_admin.html', {'request': request, 'pod': pod, 'lockers': lh.lockers[pod]})
@@ -180,7 +176,7 @@ def order_processor(order, boot=False):
     return {"cmd": "populate_table", "data":lh.lockers[data['pod']]}
 
 @app.post('/orders', response_class=JSONResponse)
-async def get_pod(request: Request, order: dict):
+async def order_taker(request: Request, order: dict):
     print(order)
     resp = order_processor(order)
         

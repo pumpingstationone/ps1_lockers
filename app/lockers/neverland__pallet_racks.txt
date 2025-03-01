@@ -1,2 +1,16 @@
 {"cmd": "update_locker", "data": {"address": 23, "name": "test", "status": "empty", "pod": "neverland__pallet_racks"}}
 {"cmd": "update_locker", "data": {"address": 23, "name": "", "status": "empty", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 51, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 52, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 53, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 54, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 55, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 56, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 57, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 58, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 59, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 60, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 60, "name": "", "status": "empty", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 60, "name": "unclaimable", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 1, "name": "claire", "status": "owned", "pod": "neverland__pallet_racks"}}
+{"cmd": "update_locker", "data": {"address": 1, "name": "", "status": "empty", "pod": "neverland__pallet_racks"}}
